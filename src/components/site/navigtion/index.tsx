@@ -32,9 +32,9 @@ const Navigtion = (props: Props) => {
           </li>
         </ul>
       </nav>
-      <aside className="cursor-pointer flex gap-1">
+      <aside className="cursor-pointer flex gap-1 z-30">
         <Link
-          className="bg-primary  rounded-lg p-2 px-4 text-white dark:text-gray-900"
+          className="bg-primary rounded-lg p-2 px-4 text-white dark:text-gray-900"
           href={"/agency"}
         >
           Login
