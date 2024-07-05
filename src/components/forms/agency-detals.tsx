@@ -43,7 +43,7 @@ import { Switch } from '../ui/switch'
 import {
   deleteAgency,
   initUser,
-  saveActivatyLogNotification,
+  saveActivityLogoNotification,
   updateAgencyDetails,
   upsertAgency,
 } from '@/lib/queires'
@@ -135,8 +135,7 @@ const AgencyDetails = ({ data }: Props) => {
       }
 
       newUserData = await initUser({ role: 'AGENCY_OWNER' })
-      if (!data?.customerId && !custId) return
-
+      if (!data) return
       const response = await upsertAgency({
         id: data?.id ? data.id : v4(),
         customerId: data?.customerId || custId || '',
@@ -408,10 +407,10 @@ const AgencyDetails = ({ data }: Props) => {
                     onValueChange={async (val) => {
                       if (!data?.id) return
                       await updateAgencyDetails(data.id, { goal: val })
-                      await saveActivatyLogNotification({
+                      await saveActivityLogoNotification({
                         agencyId: data.id,
                         description: `Updated the agency goal to | ${val} Sub Account`,
-                        subAccountId: undefined,
+                        subaccountId: undefined,
                       })
                       router.refresh()
                     }}

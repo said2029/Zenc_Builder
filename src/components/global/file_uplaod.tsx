@@ -1,8 +1,9 @@
+"use client";
 import { FileIcon, X } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { Button } from "../ui/button";
-import { UploadDropzone } from "@/lib/uploadThing";
+import { UploadButton, UploadDropzone } from "@/utils/uploadthing";
 
 type Props = {
   apiEndpoint: "agencyLogo" | "avatar" | "subaccountLogo";
@@ -47,13 +48,19 @@ const FileUpload = ({ apiEndpoint, onChange, value }: Props) => {
   }
   return (
     <div className="w-full bg-muted/30">
-      <UploadDropzone
-        endpoint={apiEndpoint}
+      <UploadButton
+        endpoint="imageUploader" // Corrected endpoint prop
         onClientUploadComplete={(res) => {
-          onChange(res?.[0].url);
+          if (res) {
+            console.log(res);
+            // Do something with the response
+            // onChange(res?.[0].url);
+          }
         }}
         onUploadError={(error: Error) => {
-          console.log(error);
+          // Handle the error
+          console.error(error);
+          // You can display an error message or take any necessary action
         }}
       />
     </div>

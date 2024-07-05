@@ -1,9 +1,10 @@
-// import BlurPage from '@/components/global/blur-page'
 // import InfoBar from '@/components/global/infobar'
+import BlurPage from "@/components/global/blur-Page";
+import InfoBar from "@/components/global/infobar";
 import Sidebar from "@/components/sidebar";
 import Unauthorized from "@/components/unauthorized";
 import {
-  getNotificationsAndUser,
+  getNotificationAndUser,
   verifyAndAcceptInvitation,
 } from "@/lib/queires";
 import { currentUser } from "@clerk/nextjs/server";
@@ -34,13 +35,19 @@ const layout = async ({ children, params }: Props) => {
     return <Unauthorized />;
 
   let allNoti: any = [];
-  const notifications = await getNotificationsAndUser(agencyId);
+  const notifications = await getNotificationAndUser(agencyId);
   if (notifications) allNoti = notifications;
 
   return (
-    <div>
-      <div >{children}</div>
-      <Sidebar id={params.agencyId} type="agency" />
+    <div className="h-screen overflow-hidden">
+      <InfoBar notifications={allNoti} role={allNoti.User?.role}>
+        <Sidebar id={params.agencyId} type="agency" />
+      </InfoBar>
+      <div className="">
+        <div className="relative">
+          <BlurPage>{children}</BlurPage>
+        </div>
+      </div>
     </div>
   );
 };

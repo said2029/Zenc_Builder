@@ -4,6 +4,10 @@ import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import ModalProvider from "@/providers/model-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+
+import { ourFileRouter } from "@/app/api/uploadthing/core";
 
 const font = DM_Sans({ subsets: ["latin"] });
 
@@ -20,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
+        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

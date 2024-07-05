@@ -28,7 +28,7 @@ import {
 import FileUpload from '../global/file_uplaod'
 import { Agency, SubAccount } from '@prisma/client'
 import { useToast } from '../ui/use-toast'
-import { saveActivatyLogNotification, upsertSubAccount } from '@/lib/queires'
+import {saveActivityLogoNotification, upsertSubAccount } from '@/lib/queires'
 import { useEffect } from 'react'
 import Loading from '../global/loading'
 import { useModal } from '@/providers/model-provider'
@@ -39,7 +39,7 @@ const formSchema = z.object({
   companyPhone: z.string().min(1),
   address: z.string(),
   city: z.string(),
-  subAccountLogo: z.string(),
+  subAccountLogo: z.string().default(""),
   zipCode: z.string(),
   state: z.string(),
   country: z.string(),
@@ -101,10 +101,10 @@ const SubAccountDetails: React.FC<SubAccountDetailsProps> = ({
         goal: 5000,
       })
       if (!response) throw new Error('No response from server')
-      await saveActivatyLogNotification({
+      await saveActivityLogoNotification({
         agencyId: response.agencyId,
         description: `${userName} | updated sub account | ${response.name}`,
-        subAccountId: response.id,
+        subaccountId: response.id,
       })
 
       toast({

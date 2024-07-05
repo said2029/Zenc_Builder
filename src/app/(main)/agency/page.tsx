@@ -1,5 +1,5 @@
 import AgenctDetals from "@/components/forms/agency-detals";
-import { getUserAuthDetals, verifyAndAcceptInvitation } from "@/lib/queires";
+import {getAuthUserDetails, verifyAndAcceptInvitation } from "@/lib/queires";
 import { currentUser } from "@clerk/nextjs/server";
 import { Plan } from "@prisma/client";
 import { redirect } from "next/navigation";
@@ -10,7 +10,7 @@ export default async function page({
   searchParams: { plan: Plan; state: string; code: string };
 }) {
   const agencyId = await verifyAndAcceptInvitation();
-  const user = await getUserAuthDetals();
+  const user = await getAuthUserDetails();
   if (agencyId) {
     if (user?.role === "SUBACCOUNT_GUEST" || user?.role === "SUBACCOUNT_USER") {
       return redirect("/sunaccount");
