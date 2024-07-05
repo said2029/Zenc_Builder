@@ -39,7 +39,7 @@ const formSchema = z.object({
   companyPhone: z.string().min(1),
   address: z.string(),
   city: z.string(),
-  subAccountLogo: z.string().default(""),
+  subAccountLogo: z.string(),
   zipCode: z.string(),
   state: z.string(),
   country: z.string(),

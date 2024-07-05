@@ -4,10 +4,11 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "../ui/button";
 import { UploadButton, UploadDropzone } from "@/utils/uploadthing";
+import { CldImage, CldUploadButton, CldUploadWidget } from "next-cloudinary";
 
 type Props = {
   apiEndpoint: "agencyLogo" | "avatar" | "subaccountLogo";
-  onChange: (url?: string) => void;
+  onChange?: (url?: string) => void;
   value?: string;
 };
 
@@ -39,7 +40,7 @@ const FileUpload = ({ apiEndpoint, onChange, value }: Props) => {
             </a>
           </div>
         )}
-        <Button onClick={() => onChange("")} variant="ghost" type="button">
+        <Button variant="ghost" type="button">
           <X className="h-4 w-4" />
           Remove Logo
         </Button>
@@ -47,8 +48,8 @@ const FileUpload = ({ apiEndpoint, onChange, value }: Props) => {
     );
   }
   return (
-    <div className="w-full bg-muted/30">
-      <UploadButton
+    <div className="w-full bg-muted/30 z-[9999]">
+      {/* <UploadButton
         endpoint="imageUploader" // Corrected endpoint prop
         onClientUploadComplete={(res) => {
           if (res) {
@@ -62,6 +63,24 @@ const FileUpload = ({ apiEndpoint, onChange, value }: Props) => {
           console.error(error);
           // You can display an error message or take any necessary action
         }}
+      /> */}
+      <CldUploadButton
+        options={{
+          multiple: false,
+        }}
+        className="w-full p-3 bg-blue-500 rounded-lg mt-2"
+        onSuccess={(res: any) => {
+          console.log("success", res?.info?.secure_url);
+          if (res) {
+            if (onChange) onChange(res?.info?.secure_url ?? undefined);
+          }
+        }}
+        onError={(error) => {
+          // Handle the error
+          console.error(error);
+          // You can display an error message or take any necessary action
+        }}
+        uploadPreset="cloudinary_next"
       />
     </div>
   );

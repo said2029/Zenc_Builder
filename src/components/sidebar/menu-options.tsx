@@ -175,7 +175,7 @@ const MenuOptions = ({
                               >
                                 <div className="relative w-16">
                                   <Image
-                                    src={"/assets/plura-logo.svg"}
+                                    src={subaccount.subAccountLogo ||"/assets/plura-logo.svg"}
                                     alt="subaccount Logo"
                                     fill
                                     className="rounded-md object-contain"

@@ -20,9 +20,9 @@ import { v4 } from 'uuid'
 import {
   deleteTag,
   getTagsForSubaccount,
-  saveActivityLogsNotification,
+  saveActivityLogoNotification,
   upsertTag,
-} from '@/lib/queries'
+} from '@/lib/queires'
 
 import {
   Command,
@@ -101,7 +101,7 @@ const TagCreator = ({ getSelectedTags, subAccountId, defaultTags }: Props) => {
         title: 'Created the tag',
       })
 
-      await saveActivityLogsNotification({
+      await saveActivityLogoNotification({
         agencyId: undefined,
         description: `Updated a tag | ${response?.name}`,
         subaccountId: subAccountId,
@@ -128,7 +128,7 @@ const TagCreator = ({ getSelectedTags, subAccountId, defaultTags }: Props) => {
         description: 'The tag is deleted from your subaccount.',
       })
 
-      await saveActivityLogsNotification({
+      await saveActivityLogoNotification({
         agencyId: undefined,
         description: `Deleted a tag | ${response?.name}`,
         subaccountId: subAccountId,

@@ -14,15 +14,14 @@ import {
   User,
 } from "@prisma/client";
 import { v4 } from "uuid";
-// import {
-//   CreateFunnelFormSchema,
-//   CreateMediaType,
-//   UpsertFunnelPage,
-// } from './types'
+import {
+  CreateFunnelFormSchema,
+  CreateMediaType,
+  UpsertFunnelPage,
+} from './types'
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
-import { CreateMediaType } from "./types";
 
 export const getAuthUserDetails = async () => {
   const user = await currentUser();
@@ -517,10 +516,27 @@ export const createMedia = async (
       name: mediaFile.name,
       subAccountId: subaccountId,
     },
-  })
+  });
 
-  return response
-}
+  return response;
+};
+export const upsertFunnel = async (
+  subaccountId: string,
+  funnel: z.infer<typeof CreateFunnelFormSchema> & { liveProducts: string },
+  funnelId: string
+) => {
+  const response = await db.funnel.upsert({
+    where: { id: funnelId },
+    update: funnel,
+    create: {
+      ...funnel,
+      id: funnelId || v4(),
+      subAccountId: subaccountId,
+    },
+  });
+
+  return response;
+};
 
 export const deleteMedia = async (mediaId: string) => {
   const response = await db.media.delete({

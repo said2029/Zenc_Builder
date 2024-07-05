@@ -75,7 +75,7 @@ const UploadMediaForm = ({ subaccountId }: Props) => {
           Please enter the details for your file
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField

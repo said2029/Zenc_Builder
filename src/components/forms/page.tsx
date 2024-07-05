@@ -1,4 +1,4 @@
-import BlurPage from '@/components/global/blur-Page'
+import BlurPage from '@/components/global/blur-page'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -94,7 +94,7 @@ const ContactPage = async ({ params }: Props) => {
                   <Badge className="bg-emerald-700">Active</Badge>
                 )}
               </TableCell>
-              {/* <TableCell>{format(contact.createdAt, 'MM/dd/yyyy')}</TableCell> */}
+              <TableCell>{format(contact.createdAt, 'MM/dd/yyyy')}</TableCell>
               <TableCell className="text-right">
                 {formatTotal(contact.Ticket)}
               </TableCell>

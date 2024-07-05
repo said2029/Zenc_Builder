@@ -8,6 +8,7 @@ import {
   DialogHeader,
 } from "../ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { X } from "lucide-react";
 
 type Props = {
   title: string;
@@ -25,8 +26,9 @@ const CustomModal = ({ children, defaultOpen, subheading, title }: Props) => {
 
   if (!isMounted) return;
   return (
-    <Dialog open={isOpen || defaultOpen} onOpenChange={setClose}>
+    <Dialog  modal={false} open={isOpen || defaultOpen}>
       <DialogContent className="overflow-scroll md:max-h-[700px] md:h-fit h-screen bg-card">
+        <X className="cursor-pointer" onClick={setClose}/>
         <DialogHeader className="pt-8 text-left">
           <DialogTitle className="text-2xl font-bold">{title}</DialogTitle>
           <DialogDescription>{subheading}</DialogDescription>
