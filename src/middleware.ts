@@ -1,7 +1,7 @@
 import { authMiddleware } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 export default authMiddleware({
-  publicRoutes: ["/site", "/api/uploadthing"],
+  publicRoutes: ["/site", "/api/uploadthing","/api/stripe/create-customer"],
   async beforeAuth(auth, req) {},
   async afterAuth(auth, req) {
     const url = req.nextUrl;
@@ -39,5 +39,5 @@ export default authMiddleware({
 });
 
 export const config = {
-  matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)']
 };

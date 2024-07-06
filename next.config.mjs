@@ -11,6 +11,7 @@ const nextConfig = {
     ],
   },
   reactStrictMode: false,
+  pageExtensions: ["tsx", "ts"],
 };
 
 export default nextConfig;
